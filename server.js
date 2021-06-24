@@ -114,17 +114,6 @@ io.of('/chat-room').on("connection", (socket) => {
         }
 
     });
-
-    socket.on('pause-stream', msg => {
-        try {
-            let roomId = jwt.verify(msg, process.env.SOCKET_AUTH);
-            socket.to(roomId).emit('stream-paused');
-
-        } catch (err) {
-            socket.disconnect();
-
-        }
-    });
 });
 
 httpServer.listen(process.env.PORT || 3001, () => console.log('Server started'));
